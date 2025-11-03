@@ -1,0 +1,87 @@
+import React from "react";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../hooks/useAuth";
+
+const Navbar = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth();
+
+  return (
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-semibold text-primary">
+          🏥 HealthConnect
+        </Link>
+
+        {/* Navigation Links */}
+        <div className="hidden md:flex space-x-6">
+          <Link
+            to="/"
+            className="text-accentdark hover:text-primary transition font-medium"
+          >
+            Home
+          </Link>
+          <Link
+            to="/hospitals"
+            className="text-accentdark hover:text-primary transition font-medium"
+          >
+            Hospitals
+          </Link>
+          <Link
+            to="/doctors"
+            className="text-accentdark hover:text-primary transition font-medium"
+          >
+            Doctors
+          </Link>
+          <Link
+            to="/appointments"
+            className="text-accentdark hover:text-primary transition font-medium"
+          >
+            Appointments
+          </Link>
+        </div>
+
+        {/* Auth Buttons */}
+        <div className="flex items-center space-x-3">
+          {isAuthenticated ? (
+            <>
+              <span className="hidden sm:block text-muted">
+                Hello,{" "}
+                <span className="font-semibold text-accentdark">
+                  {user?.name}
+                </span>
+              </span>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate("/login");
+                }}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="bg-primary/10 text-primary border border-primary px-4 py-2 rounded-lg hover:text-blue-700 transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
