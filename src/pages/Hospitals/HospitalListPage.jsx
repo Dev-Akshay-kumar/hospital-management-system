@@ -3,12 +3,12 @@ import { MapPin, Search, Phone, Star } from "lucide-react";
 import { calcDistance } from "../../utils/calcDistance";
 import { COLORS, DEFAULT_LOCATION } from "../../utils/constants";
 import { getHospitals } from "../../api/hospitalApi"; // example API call
+import useHospitals from "../../hooks/useHospitals";
 
 const HospitalListPage = () => {
-  const [hospitals, setHospitals] = useState([]);
+  const { hospitals, loading, setLoading } = useHospitals();
   const [searchTerm, setSearchTerm] = useState("");
   const [userLocation, setUserLocation] = useState(DEFAULT_LOCATION);
-  const [loading, setLoading] = useState(true);
 
   // Fetch user's location
   useEffect(() => {
@@ -30,8 +30,7 @@ const HospitalListPage = () => {
     const fetchHospitals = async () => {
       try {
         setLoading(true);
-        const data = await getHospitals(); // from API
-        setHospitals(data);
+await getHospitals(); // or use fetchHospitals from useHospitals hook
       } catch (err) {
         console.error("Failed to fetch hospitals:", err);
       } finally {
@@ -68,7 +67,7 @@ const HospitalListPage = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 px-4 py-3 text-gray-700 outline-none"
           />
-          <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 flex items-center justify-center">
+          <button className="bg-blue-600 hover:bg-teal-500 px-6 py-3 flex items-center justify-center">
             <Search className="w-5 h-5 text-white" />
           </button>
         </div>
@@ -133,7 +132,7 @@ const HospitalListPage = () => {
                       onClick={() =>
                         (window.location.href = `/hospitals/${hospital._id}`)
                       }
-                      className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition"
+                      className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-teal-500 transition"
                     >
                       View Details
                     </button>

@@ -5,13 +5,14 @@ import useAuth from "../../hooks/useAuth";
 const Navbar = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
+  console.log("Navbar - isAuthenticated:", isAuthenticated, "user:", user);
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white/10 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-white/20">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="text-2xl font-semibold text-primary">
-          🏥 HealthConnect
+          HealthCare+
         </Link>
 
         {/* Navigation Links */}
@@ -21,6 +22,12 @@ const Navbar = () => {
             className="text-accentdark hover:text-primary transition font-medium"
           >
             Home
+          </Link>
+          <Link
+            to="/profile"
+            className="text-accentdark hover:text-primary transition font-medium"
+          >
+            Profile
           </Link>
           <Link
             to="/hospitals"
@@ -40,6 +47,12 @@ const Navbar = () => {
           >
             Appointments
           </Link>
+           <Link
+            to="/services"
+            className="text-accentdark hover:text-primary transition font-medium"
+          >
+            Services
+          </Link>
         </div>
 
         {/* Auth Buttons */}
@@ -49,7 +62,7 @@ const Navbar = () => {
               <span className="hidden sm:block text-muted">
                 Hello,{" "}
                 <span className="font-semibold text-accentdark">
-                  {user?.name}
+                  {user?.firstName}
                 </span>
               </span>
               <button
@@ -66,7 +79,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                className="bg-teal-500 text-white px-4 py-2 rounded-lg  transition hover:bg-[#0A9586] hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 Login
               </Link>

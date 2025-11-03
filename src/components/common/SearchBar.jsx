@@ -22,7 +22,7 @@ const SearchBar = ({ placeholder = "Search...", onSearch }) => {
       />
       <button
         type="submit"
-        className="bg-primary text-white px-5 py-2 font-medium hover:bg-blue-700 transition"
+        className="bg-primary text-white px-5 py-2 font-medium hover:bg-teal-500 transition"
       >
         Search
       </button>

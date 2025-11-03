@@ -31,7 +31,7 @@ const DoctorDetailPage = () => {
 
   if (loading)
     return (
-      <div className="text-center mt-20 text-gray-500">
+      <div className="text-center mt-20 text-gray-500 animate-pulse">
         Loading doctor details...
       </div>
     );
@@ -42,35 +42,41 @@ const DoctorDetailPage = () => {
     );
 
   return (
-    <div className="min-h-screen bg-background px-6 py-10 md:px-16">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#f9f9f9] via-white to-[#e9fdf9] px-6 py-10 md:px-16">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
         <div className="flex flex-col md:flex-row">
           <img
             src={doctor.image || "/images/doctor-placeholder.jpg"}
             alt={doctor.name}
-            className="w-full md:w-1/3 h-64 md:h-auto object-cover"
+            className="w-full md:w-1/3 h-72 md:h-auto object-cover border-b md:border-b-0 md:border-r border-gray-200"
           />
-          <div className="p-6 md:p-8 flex-1">
-            <h2 className="text-2xl font-bold mb-1">{doctor.name}</h2>
-            <p className="text-gray-600 mb-3">{doctor.specialization}</p>
-            <div className="flex items-center text-yellow-500 mb-3">
-              <Star className="w-5 h-5" />
+          <div className="p-8 flex-1">
+            <h2 className="text-3xl font-bold text-[#0A9586] mb-1">
+              {doctor.name}
+            </h2>
+            <p className="text-gray-600 mb-3 text-lg">
+              {doctor.specialization}
+            </p>
+
+            <div className="flex items-center text-yellow-500 mb-4">
+              <Star className="w-5 h-5 fill-yellow-400" />
               <span className="ml-1 text-gray-700">
                 {doctor.rating || 4.8} ({doctor.reviews || 87} reviews)
               </span>
             </div>
-            <p className="text-gray-600 text-sm mb-4">
+
+            <p className="text-gray-700 text-sm leading-relaxed mb-5">
               {doctor.description ||
                 "Experienced and compassionate doctor specializing in personalized patient care."}
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="flex items-center text-gray-700 text-sm">
-                <GraduationCap className="w-5 h-5 text-blue-600 mr-2" />
+              <div className="flex items-center text-gray-700 text-sm font-medium">
+                <GraduationCap className="w-5 h-5 text-[#0A9586] mr-2" />
                 <span>{doctor.qualification || "MBBS, MD"}</span>
               </div>
-              <div className="flex items-center text-gray-700 text-sm">
-                <Briefcase className="w-5 h-5 text-blue-600 mr-2" />
+              <div className="flex items-center text-gray-700 text-sm font-medium">
+                <Briefcase className="w-5 h-5 text-[#0A9586] mr-2" />
                 <span>{doctor.experience || "10 years experience"}</span>
               </div>
             </div>
@@ -80,31 +86,36 @@ const DoctorDetailPage = () => {
                 onClick={() =>
                   (window.location.href = `/consult/${doctor._id}`)
                 }
-                className="flex items-center bg-blue-600 text-white px-5 py-3 rounded-full font-medium hover:bg-blue-700 transition"
+                className="flex items-center gap-2 bg-gradient-to-r from-[#0A9586] to-teal-600 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all"
               >
-                <MessageSquare className="w-4 h-4 mr-2" /> Book Online
-                Consultancy
+                <MessageSquare className="w-4 h-4" /> Book Online Consultancy
               </button>
+
               <button
                 onClick={() =>
                   (window.location.href = `/appointments/${doctor._id}`)
                 }
-                className="flex items-center border border-blue-600 text-blue-600 px-5 py-3 rounded-full font-medium hover:bg-blue-50 transition"
+                className="flex items-center gap-2 border border-[#0A9586] text-[#0A9586] px-6 py-3 rounded-full font-semibold hover:bg-[#0A9586]/10 hover:shadow transition-all"
               >
-                <Calendar className="w-4 h-4 mr-2" /> Schedule Visit
+                <Calendar className="w-4 h-4" /> Schedule Visit
               </button>
             </div>
           </div>
         </div>
 
         {/* Reviews Section */}
-        <div className="p-6 md:p-8 border-t border-gray-100">
-          <h3 className="text-xl font-semibold mb-4">Patient Reviews</h3>
+        <div className="p-8 border-t border-gray-100 bg-gradient-to-b from-white to-[#f9fffd]">
+          <h3 className="text-xl font-semibold text-[#0A9586] mb-4">
+            Patient Reviews
+          </h3>
           {doctor.reviewsList && doctor.reviewsList.length > 0 ? (
-            <div className="space-y-4">
+            <div className="space-y-5">
               {doctor.reviewsList.map((r, i) => (
-                <div key={i} className="border-b pb-3">
-                  <p className="text-gray-800 font-medium">{r.user}</p>
+                <div
+                  key={i}
+                  className="border border-gray-200 rounded-xl p-4 hover:bg-[#f9fffd] hover:shadow-sm transition"
+                >
+                  <p className="text-gray-800 font-semibold">{r.user}</p>
                   <p className="text-sm text-gray-600 italic mb-1">
                     “{r.comment}”
                   </p>

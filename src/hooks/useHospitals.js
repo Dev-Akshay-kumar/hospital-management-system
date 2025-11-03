@@ -1,39 +1,55 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { API_BASE_URL } from "../utils/constants";
-import useLocation from "./useLocation";
 
-const useHospitals = (medicalIssue = "") => {
+const useHospitals = () => {
+  const [hospital, setHospital] = useState(null);
   const [hospitals, setHospitals] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { getDistance } = useLocation();
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchHospitals = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(
-          `${API_BASE_URL}/hospitals?issue=${medicalIssue}`
-        );
-        const data = await res.json();
+  // ✅ Fetch all hospitals (for HospitalList page)
+  const fetchHospitals = useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`${API_BASE_URL}/hospitals`);
+      if (!res.ok) throw new Error("Failed to fetch hospitals");
+      const data = await res.json();
+      setHospitals(data);
+    } catch (error) {
+      console.error("❌ Error fetching hospitals:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-        // Add distance from user location
-        const withDistance = data.map((h) => ({
-          ...h,
-          distance: getDistance(h.lat, h.lng),
-        }));
+  // ✅ Fetch single hospital by ID (for HospitalDetails page)
+  const fetchHospitalById = useCallback(async (id) => {
+    if (!id) return;
+    try {
+      setLoading(true);
+      const res = await fetch(`${API_BASE_URL}/hospitals/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch hospital details");
+      const data = await res.json();
+      setHospital(data);
+    } catch (error) {
+      console.error("❌ Error fetching hospital by ID:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-        setHospitals(withDistance);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchHospitals();
-  }, [medicalIssue, getDistance]);
+  // 🟢 We DO NOT call anything automatically here.
+  // HospitalListPage will call fetchHospitals()
+  // HospitalDetailsPage will call fetchHospitalById(id)
+  // This gives full control to each page component.
 
-  return { hospitals, loading, error };
+  return {
+    hospitals,
+    hospital,
+    loading,
+    setLoading,
+    fetchHospitals,
+    fetchHospitalById,
+  };
 };
 
 export default useHospitals;

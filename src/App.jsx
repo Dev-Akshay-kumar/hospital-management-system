@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -14,8 +14,15 @@ import BookingPage from "./pages/Appointments/BookingPage";
 import QueuePage from "./pages/Appointments/QueuePage";
 import HospitalDetailsPage from "./pages/Hospitals/HospitalDetailsPage";
 import DoctorListPage from "./pages/Doctors/DoctorListPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import useAuth from "./hooks/useAuth";
 
 const App = () => {
+  const loadUser = useAuth((state) => state.loadUser);
+
+  useEffect(() => {
+    loadUser(); // restores session from localStorage
+  }, [loadUser]);
   return (
     <AuthProvider>
       <LocationProvider>
@@ -33,6 +40,7 @@ const App = () => {
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/book" element={<BookingPage />} />
               <Route path="/queue" element={<QueuePage />} />
+              <Route path="/profile" element={<UserProfilePage />} />
             </Routes>
           </div>
         </Router>

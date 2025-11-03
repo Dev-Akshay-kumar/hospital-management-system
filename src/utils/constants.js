@@ -3,7 +3,7 @@
 export const APP_NAME = "HealthConnect";
 
 export const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+  import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const SOCKET_URL =
   import.meta.env.VITE_SOCKET_URL || "http://localhost:4000";

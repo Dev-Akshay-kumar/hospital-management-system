@@ -43,7 +43,7 @@ const DoctorListPage = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button className="bg-blue-600 hover:bg-blue-700 px-5 py-3">
+          <button className="bg-blue-600 hover:bg-teal-500 px-5 py-3">
             <Search className="w-5 h-5 text-white" />
           </button>
         </div>
@@ -90,7 +90,7 @@ const DoctorListPage = () => {
                   onClick={() =>
                     (window.location.href = `/doctors/${doctor._id}`)
                   }
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full text-sm font-medium flex justify-center items-center gap-2"
+                  className="w-full bg-blue-600 hover:bg-teal-500 text-white py-2 rounded-full text-sm font-medium flex justify-center items-center gap-2"
                 >
                   <Calendar className="w-4 h-4" /> View Profile
                 </button>

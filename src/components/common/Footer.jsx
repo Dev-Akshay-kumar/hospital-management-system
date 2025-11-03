@@ -3,60 +3,83 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-900 text-white mt-16">
-      <div className="container mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
+    <footer className="bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white mt-20  shadow-inner">
+      <div className="container mx-auto px-6 py-8 grid md:grid-cols-3 gap-12">
         {/* Brand Info */}
         <div>
-          <h2 className="text-2xl font-semibold text-primary mb-3">
-            HealthConnect
+          <h2 className="text-3xl font-extrabold mb-3 tracking-wide">
+            Health<span className="text-[#0A9586]">Connect</span>
           </h2>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-gray-300 leading-relaxed">
             Making healthcare accessible — find hospitals, consult doctors, and
-            manage appointments easily.
+            manage appointments effortlessly with technology that cares.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2">
-            <li>
-              <Link to="/" className="hover:text-primary transition">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/hospitals" className="hover:text-primary transition">
-                Hospitals
-              </Link>
-            </li>
-            <li>
-              <Link to="/doctors" className="hover:text-primary transition">
-                Doctors
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/appointments"
-                className="hover:text-primary transition"
-              >
-                Appointments
-              </Link>
-            </li>
+          <h3 className="text-xl font-semibold mb-4 border-b-2 border-white/20 inline-block pb-1">
+            Quick Links
+          </h3>
+          <ul className="space-y-2 mt-3">
+            {[
+              { to: "/", label: "Home" },
+              { to: "/hospitals", label: "Hospitals" },
+              { to: "/doctors", label: "Doctors" },
+              { to: "/appointments", label: "Appointments" },
+              { to: "/services", label: "Services" },
+            ].map((link, index) => (
+              <li key={index}>
+                <Link
+                  to={link.to}
+                  className="text-gray-300 hover:text-[#0A9586] transition duration-300"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Contact</h3>
-          <p className="text-gray-300 text-sm">📧 support@healthconnect.in</p>
-          <p className="text-gray-300 text-sm mt-1">📞 +91 98765 43210</p>
-          <p className="text-gray-300 text-sm mt-1">📍 New Delhi, India</p>
+          <h3 className="text-xl font-semibold mb-4 border-b-2 border-white/20 inline-block pb-1">
+            Contact
+          </h3>
+          <ul className="space-y-2 text-sm text-gray-300">
+            <li>📧 support@healthconnect.in</li>
+            <li>📞 +91 98765 43210</li>
+            <li>📍 New Delhi, India</li>
+          </ul>
+
+          <div className="flex gap-4 mt-6">
+            <a
+              href="#"
+              className="bg-white/10 hover:bg-[#0A9586]/30 p-2.5 rounded-full transition-all duration-300"
+            >
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="#"
+              className="bg-white/10 hover:bg-[#0A9586]/30 p-2.5 rounded-full transition-all duration-300"
+            >
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a
+              href="#"
+              className="bg-white/10 hover:bg-[#0A9586]/30 p-2.5 rounded-full transition-all duration-300"
+            >
+              <i className="fab fa-linkedin-in"></i>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="border-t border-gray-700 text-center py-4 text-sm text-gray-400">
-        © {new Date().getFullYear()} HealthConnect. All rights reserved.
+      {/* Footer Bottom */}
+      <div className="border-t border-white/10 text-center py-5 text-sm text-gray-400 backdrop-blur-sm bg-gray-800/50">
+        © {new Date().getFullYear()}{" "}
+        <span className="font-semibold text-[#0A9586]">HealthConnect</span>. All
+        rights reserved.
       </div>
     </footer>
   );

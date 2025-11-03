@@ -78,7 +78,7 @@ const QueuePage = () => {
         <div className="flex flex-col gap-3">
           <button
             onClick={() => navigate("/")}
-            className="bg-blue-600 text-white py-3 rounded-full font-medium hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white py-3 rounded-full font-medium hover:bg-teal-500 transition"
           >
             Go to Home
           </button>

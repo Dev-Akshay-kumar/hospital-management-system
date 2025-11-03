@@ -130,7 +130,7 @@ const BookingPage = () => {
         <button
           disabled={!selectedDate || !selectedTime || confirming}
           onClick={handleConfirm}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full font-medium flex justify-center items-center gap-2 transition"
+          className="w-full bg-blue-600 hover:bg-teal-500 text-white py-3 rounded-full font-medium flex justify-center items-center gap-2 transition"
         >
           {confirming ? (
             <>
